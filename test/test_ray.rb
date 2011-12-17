@@ -1,6 +1,4 @@
 require "helper"
-require "ray"
-require "position"
 
 class RayTest < Test::Unit::TestCase
   

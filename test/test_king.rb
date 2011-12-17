@@ -1,6 +1,5 @@
-require "test/unit"
-require "king.rb"
-require "position.rb"
+require "helper"
+
 class KingTest < Test::Unit::TestCase
   
   def test_generate_moves_a1

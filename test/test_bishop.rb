@@ -1,7 +1,4 @@
 require "helper"
-require "position"
-require "bishop"
-require "ray"
 
 class BishopTest < Test::Unit::TestCase
   def test_generate_moves

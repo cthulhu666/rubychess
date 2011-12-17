@@ -1,7 +1,4 @@
-require "test/unit"
-require "queen"
-require "position"
-require "board"
+require "helper"
 
 class QueenTest < Test::Unit::TestCase
   

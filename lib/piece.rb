@@ -2,8 +2,8 @@ module Piece
       
   def generate_all_moves
     moves = []
-    (0...8).each do |x|
-      (0...8).each do |y|
+    (0..7).each do |x|
+      (0..7).each do |y|
         p = Position.new x,y
         moves[p.ordinal] = generate_moves p
         puts "#{p} -> #{moves[p.ordinal]}"

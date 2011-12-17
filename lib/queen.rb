@@ -20,6 +20,7 @@ class Queen
   end
   
   def valid_moves pos, board
+    pos = Position.create(pos)
     valid_moves = []
     my_color, my_piece = board[pos]
     puts "my_color: #{my_color}; my_piece: #{my_piece}"

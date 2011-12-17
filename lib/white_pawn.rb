@@ -1,5 +1,5 @@
 class WhitePawn
-  /* generuje wszystkie pozycje na które możliwy jest ruch z danej pozycji */
+  # generuje wszystkie pozycje na które możliwy jest ruch z danej pozycji
   def generate_moves position
     moves = Array.new
     moves << position.go(:n)

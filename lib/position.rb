@@ -3,15 +3,14 @@ class Position
   
   attr_reader :ordinal, :x, :y
   
-  @@position = Array.new
-  
   def initialize x, y
     @x, @y = x, y
     @ordinal = x + y * 8;
   end
   
- (0..7).each do |x|
-   (0..7).each do |y|
+  @@position = Array.new  
+  (0..7).each do |x|
+    (0..7).each do |y|
       p = Position.new x, y
       @@position[x + y * 8] = p 
     end
@@ -21,19 +20,26 @@ class Position
     def neighbour dir
       ILLEGAL
     end
-  end
+  end 
+  
+  def self.create pos
+    case pos
+    when Position
+      return pos
+    when Numeric
+      @@position[pos]
+    else
+      byte_x, byte_y = pos.to_s.upcase.bytes.map(&:to_i)
+      x = byte_x - 65;
+      y = byte_y - 49;
+      raise "x must be between 0..7" unless (0..7).include? x
+      raise "y must be between 0..7" unless (0..7).include? y
+    @@position[x + y * 8]
+    end    
+  end  
   
   def <=>(anOther)
     ordinal <=> anOther.ordinal
-  end
-  
-  def Position.create pos
-    byte_x, byte_y = pos.to_s.upcase.bytes.map(&:to_i)
-    x = byte_x - 65;
-    y = byte_y - 49;
-    raise "x must be between 0..7" unless (0..7).include? x
-    raise "y must be between 0..7" unless (0..7).include? y
-    @@position[x + y * 8]
   end
   
   def neighbour dir

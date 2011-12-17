@@ -26,8 +26,8 @@ class Board
     @fields[p.ordinal] = [color, piece]
   end
   
-  def is_clear pos
-    @fields[pos.ordinal].nil?
+  def is_clear? pos
+    @fields[Position.create(pos).ordinal].nil?
   end
   
   def [] pos

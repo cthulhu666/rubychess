@@ -1,6 +1,4 @@
 require "helper"
-require "queen"
-require "king"
 
 class PieceTest < Test::Unit::TestCase
   

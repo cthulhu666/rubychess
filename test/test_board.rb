@@ -1,5 +1,4 @@
-require "test/unit"
-require "board"
+require "helper"
 
 class BoardTest < Test::Unit::TestCase
   
@@ -11,8 +10,8 @@ class BoardTest < Test::Unit::TestCase
   def test_is_clear
     b = Board.new(:white => { :king => "A1"}, 
                   :black => { :king => "H8"})
-    assert b.is_clear Position.create "A2"
-    assert !(b.is_clear Position.create "A1")
+    assert b.is_clear? Position.create "A2"
+    assert !(b.is_clear? Position.create "A1")
   end
   
   def test_aaa

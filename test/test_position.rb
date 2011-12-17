@@ -1,5 +1,5 @@
-require "test/unit"
-require "position.rb"
+require"helper"
+
 class PositionTest < Test::Unit::TestCase
   
   def test_create_string 
