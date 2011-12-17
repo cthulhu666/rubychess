@@ -1,4 +1,4 @@
-require "test/unit"
+require "helper"
 require "position"
 require "bishop"
 require "ray"

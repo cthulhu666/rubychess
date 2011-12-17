@@ -1,8 +1,15 @@
 class Ray
   
-  def Ray.create start, dir
+  def self.create start, dir
     positions = Array.new
-    position = start
+    
+    position = case start
+    when Position
+      start
+    else
+      Position.create(start)      
+    end
+    
     while (position = position.neighbour(dir)) != Position::ILLEGAL
       positions << position
     end
@@ -14,7 +21,7 @@ class Ray
   end
   
   def to_s
-    @positions.to_s
+    @positions.inject("") { |str, pos| str << pos.to_s }
   end
   
   def length

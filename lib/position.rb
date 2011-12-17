@@ -10,7 +10,7 @@ class Position
     @ordinal = x + y * 8;
   end
   
-   (0..7).each do |x|
+ (0..7).each do |x|
    (0..7).each do |y|
       p = Position.new x, y
       @@position[x + y * 8] = p 
@@ -28,8 +28,9 @@ class Position
   end
   
   def Position.create pos
-    x = pos[0] - 65;
-    y = pos[1] - 49;
+    byte_x, byte_y = pos.to_s.upcase.bytes.map(&:to_i)
+    x = byte_x - 65;
+    y = byte_y - 49;
     raise "x must be between 0..7" unless (0..7).include? x
     raise "y must be between 0..7" unless (0..7).include? y
     @@position[x + y * 8]

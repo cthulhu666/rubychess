@@ -1,6 +1,7 @@
-require "test/unit"
-require "ray.rb"
-require "position.rb"
+require "helper"
+require "ray"
+require "position"
+
 class RayTest < Test::Unit::TestCase
   
   def test_create_a1_n

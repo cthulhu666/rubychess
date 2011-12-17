@@ -1,6 +1,18 @@
 require "test/unit"
 require "position.rb"
 class PositionTest < Test::Unit::TestCase
+  
+  def test_create_string 
+    assert_equal "A1", Position.create("A1").to_s
+  end
+  
+  def test_create_string_downcased
+    assert_equal "A1", Position.create("a1").to_s
+  end
+  
+  def test_create_symbol
+    assert_equal "A1", Position.create(:a1).to_s
+  end
 
   def test_n
     pos = Position.create 'A1'
@@ -19,7 +31,7 @@ class PositionTest < Test::Unit::TestCase
     assert_equal 3, pos.all_neighbours.size
   end
   
-  def test neighbour_ne
+  def test_neighbour_ne
     pos = Position.create 'A1'
     assert pos.neighbour(:ne).to_s == 'B2'
   end
