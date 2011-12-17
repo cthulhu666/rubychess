@@ -1,5 +1,8 @@
 #encoding: utf-8
+require "singleton"
+
 class Knight
+  include Piece, Singleton
   
   # generuje wszystkie pozycje na które możliwy jest ruch z danej pozycji
   def generate_moves position

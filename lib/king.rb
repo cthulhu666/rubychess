@@ -1,4 +1,3 @@
-require 'piece'
 require 'singleton'
 
 class King 

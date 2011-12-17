@@ -1,5 +1,3 @@
-require 'ray'
-require 'piece'
 require 'singleton'
 
 class Queen
@@ -12,11 +10,10 @@ class Queen
   end
   
   def generate_moves position
-    @rays = Array.new
-    for dir in [:n, :ne, :e, :se, :s, :sw, :w, :nw]
-      @rays << Ray.create(position, dir)
+    rays = [:n, :ne, :e, :se, :s, :sw, :w, :nw].map do |dir|
+      Ray.create(position, dir)
     end
-    @rays.delete_if { |r| r.length == 0 }
+    rays.delete_if { |r| r.length == 0 }
   end
   
   def valid_moves pos, board
