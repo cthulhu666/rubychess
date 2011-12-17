@@ -28,6 +28,10 @@ class Ray
     @positions.length
   end
   
+  def empty?
+    length == 0
+  end
+  
   def include? pos
     if pos.class == Position
       @positions.include? pos
