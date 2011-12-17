@@ -3,7 +3,11 @@ class Position
   
   attr_reader :ordinal, :x, :y
   
+  DIRECTIONS = { n: [0, 1], ne: [1, 1], e: [1, 0], se: [1, -1], s: [0, -1], sw: [-1, -1], w: [-1, 0], nw: [-1, 1] }
+  
   def initialize x, y
+    raise "x must be between 0..7" unless (0..7).include? x
+    raise "y must be between 0..7" unless (0..7).include? y
     @x, @y = x, y
     @ordinal = x + y * 8;
   end
@@ -16,42 +20,37 @@ class Position
     end
   end
   
-  ILLEGAL = Position.new(-1, -1) do
-    def neighbour dir
-      ILLEGAL
-    end
-  end 
+  ILLEGAL = Object.new
   
   def self.create pos
     case pos
     when Position
       return pos
     when Numeric
-      @@position[pos]
+      return @@position[pos]
     else
       byte_x, byte_y = pos.to_s.upcase.bytes.map(&:to_i)
       x = byte_x - 65;
       y = byte_y - 49;
       raise "x must be between 0..7" unless (0..7).include? x
       raise "y must be between 0..7" unless (0..7).include? y
-    @@position[x + y * 8]
+      return @@position[x + y * 8]
     end    
   end  
   
-  def <=>(anOther)
-    ordinal <=> anOther.ordinal
+  def <=>(other)
+    ordinal <=> other.ordinal
   end
   
   def neighbour dir
-    case dir
-      when :n then go_n
-      when :ne then go_ne
-      when :e then go_e
-      when :se then go_se
-      when :s then go_s
-      when :sw then go_sw
-      when :w then go_w
-      when :nw then go_nw
+    x, y = DIRECTIONS[dir]
+    raise "dir should be one of #{DIRECTIONS.keys}" unless x
+    x += self.x
+    y += self.y    
+    if (0..7).include?(x) && (0..7).include?(y)
+      Position.new(x, y)
+    else
+      ILLEGAL
     end
   end
   
@@ -64,52 +63,23 @@ class Position
     return dst
   end
   
-  def go_n
-    return ILLEGAL if @y == 7
-    Position.new @x, @y+1
-  end
-  
-  def go_ne
-    return ILLEGAL if @y == 7 || @x == 7
-    Position.new @x+1, @y+1
-  end
-  
-  def go_e
-    return ILLEGAL if @x == 7
-    Position.new @x+1, @y
-  end
-  
-  def go_se
-    return ILLEGAL if @x == 7 || @y == 0
-    Position.new @x+1, @y-1
-  end
-  
-  def go_s
-    return ILLEGAL if @y == 0
-    Position.new @x, @y-1
-  end
-  
-  def go_sw
-    return ILLEGAL if @x == 0 || @y == 0
-    Position.new @x-1, @y-1
-  end
-  
-  def go_w
-    return ILLEGAL if @x == 0
-    Position.new @x-1, @y
-  end
-  
-  def go_nw
-    return ILLEGAL if @x == 0 || @y == 7
-    Position.new @x-1, @y+1
-  end
-  
   def all_neighbours 
-    neighbours = Array.new << go_n << go_ne << go_e << go_se << go_s << go_sw << go_w << go_nw
+    neighbours = DIRECTIONS.map { |k,v| neighbour(k) }
     neighbours.delete_if { |n| n==ILLEGAL }
   end
   
   def to_s
    ('A'..'H').to_a[@x] + (@y+1).to_s
   end
+  
+  def method_missing(name, *args)
+    if (name =~ /^go_.*$/) == 0
+      dir = name[3..-1].to_sym
+      neighbour(dir)
+    else
+      super(name, *args)
+    end
+  end
+  
+  
 end
