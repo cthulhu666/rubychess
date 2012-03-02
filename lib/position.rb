@@ -36,7 +36,11 @@ class Position
       raise "y must be between 0..7" unless (0..7).include? y
       return @@position[x + y * 8]
     end    
-  end  
+  end
+
+  def self.[](pos)
+    create(pos)
+  end
   
   def <=>(other)
     ordinal <=> other.ordinal

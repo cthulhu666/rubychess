@@ -1,6 +1,10 @@
-require"helper"
+require "./helper"
 
 class PositionTest < Test::Unit::TestCase
+
+  test "create with []" do
+    assert_equal "A1", Position["A1"].to_s
+  end
   
   def test_create_string 
     assert_equal "A1", Position.create("A1").to_s
