@@ -1,4 +1,5 @@
 nbproject/
+.idea/
 
 # rcov generated
 coverage
