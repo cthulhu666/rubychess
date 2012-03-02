@@ -9,3 +9,5 @@ require "queen"
 require "knight"
 require "bishop"
 require "rook"
+
+require "moves_generator"
