@@ -32,4 +32,12 @@ class Board
     return @fields[pos] if pos.class==Fixnum
     return @fields[Position.create(pos).ordinal] if pos.class==String
   end
+
+  def pieces(color)
+    pieces = @fields.inject([]) { |pieces, f| pieces << f if f && f[0] == color; pieces }.compact
+    if block_given?
+      pieces.each { |p| yield p }
+    end
+    pieces
+  end
 end
