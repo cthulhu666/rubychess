@@ -5,7 +5,7 @@ class Knight
   include Piece, Singleton
   
   # generuje wszystkie pozycje na które możliwy jest ruch z danej pozycji
-  def generate_moves position
+  def generate_moves(position)
     moves = Array.new
     moves << position.go(:n, :n, :e)
     moves << position.go(:e, :e, :n)

@@ -14,6 +14,6 @@ class QueenTest < Test::Unit::TestCase
    def test_valid_moves_queen
     q = Queen.instance
     board = Board.new(:white => {:queen => "A1"}, :black => {:queen => "A3"})
-    puts q.valid_moves(Position.create("A1"), board)
+    assert_equal ["A2", "A3", "B2", "C3", "D4", "E5", "F6", "G7", "H8",  "B1", "C1", "D1", "E1", "F1", "G1", "H1"], q.valid_moves(Position["A1"], board).map(&:to_s)
   end
 end

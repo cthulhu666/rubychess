@@ -1,12 +1,9 @@
 require "singleton"
 
 class Bishop
-  include Piece, Singleton
+  include Piece, Ranged, Singleton
   
-  def generate_moves position
-    rays = [:ne, :se, :sw, :nw].map do |dir|
-      Ray.create(position, dir)
-    end
-    rays.delete_if { |r| r.empty? }
+  def dirs
+    [:ne, :se, :sw, :nw]
   end
 end
