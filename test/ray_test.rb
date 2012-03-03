@@ -4,7 +4,6 @@ class RayTest < Test::Unit::TestCase
   
   def test_create_a1_n
     ray = Ray.create(Position.create('A1'), :n)
-    puts ray
     assert_equal 7, ray.length
     assert ray.include? 'A2'
     assert ray.include? Position.create 'A2'

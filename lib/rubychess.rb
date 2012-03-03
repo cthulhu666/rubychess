@@ -9,5 +9,7 @@ require "queen"
 require "knight"
 require "bishop"
 require "rook"
+require "pieces"
 
+require "piece_on_board"
 require "moves_generator"
