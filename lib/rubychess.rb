@@ -13,3 +13,4 @@ require "pieces"
 
 require "piece_on_board"
 require "moves_generator"
+require "move"

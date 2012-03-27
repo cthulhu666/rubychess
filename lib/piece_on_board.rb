@@ -16,5 +16,9 @@ class PieceOnBoard
   def valid_moves(board)
     piece.valid_moves(position, board)
   end
+  
+  def to_s
+    "#{@color} #{@piece} #{@position}"
+  end
 
 end

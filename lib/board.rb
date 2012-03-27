@@ -4,9 +4,11 @@ class Board
 
   ENTRY = Struct.new(:piece, :color, :position)
 
-  def initialize(positions)
+  def initialize(positions = nil)
     @fields = Array.new
-    [:white, :black].each { |color| add_pieces(color, positions[color]) }
+    if positions
+      [:white, :black].each { |color| add_pieces(color, positions[color]) }
+    end
   end
 
   def add_pieces(color, positions)
@@ -21,7 +23,7 @@ class Board
 
   def add_piece(color, piece, position)
     p = Position[position]
-    @fields[p.ordinal] = PieceOnBoard.new(color, piece, p)
+    @fields[p.ordinal] = PieceOnBoard.new(color, piece, p)   
   end
 
   def is_clear?(pos)
@@ -29,14 +31,12 @@ class Board
   end
 
   def [](pos)
-    return @fields[pos.ordinal] if pos.is_a? Position
-    return @fields[pos] if pos.is_a? Fixnum
-    return @fields[Position[pos].ordinal] if pos.is_a? String
+    return @fields[Position[pos].ordinal]
   end
 
-  def pieces(color)
+  def pieces(color = nil)
     pieces = @fields.inject([]) do |pieces, f|
-      pieces << f if f && f.color == color
+      pieces << f if f && (f.color == color || color.nil?)
       pieces
     end
     pieces.compact!

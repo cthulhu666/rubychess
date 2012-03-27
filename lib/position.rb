@@ -19,6 +19,7 @@ class Position
       @@position[x + y * 8] = p 
     end
   end
+  @@position.freeze
   
   ILLEGAL = Object.new
   
@@ -40,6 +41,10 @@ class Position
 
   def self.[](pos)
     create(pos)
+  end
+  
+  def self.all
+    @@position.dup
   end
   
   def <=>(other)
